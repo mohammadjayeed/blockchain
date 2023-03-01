@@ -3,16 +3,20 @@ blockchain = []
 
 def get_last_blockchain_value():
     """returns the last value of the current blockchain"""
+    if len(blockchain) < 1:
+        return None
     return blockchain[-1]
 
 
-def add_value(transaction_amount, last_transaction=[1]):
+def add_transaction(transaction_amount, last_transaction=[1]):
     """appends a transaction amount and the last transaction amount that happened in the blockchain.
 
     Arguments:
         :transaction_amount: the amount that should be added.
         :last_transaction: the last transaction amount (defaults to [1]).
     """
+    if last_transaction == None:
+        last_transaction = [1]
     blockchain.append([last_transaction, transaction_amount])
 
 def get_user_input():
@@ -23,8 +27,9 @@ def get_user_choice():
     user_input = input('Your choice: ')
     return user_input
 
-transaction_amount = get_user_input()
-add_value(transaction_amount)
+# transaction_amount = get_user_input()
+# add_value(transaction_amount)
+
 def print_blockchain_elements():
     # Output the blockchain list to the console
     for block in blockchain:
@@ -56,7 +61,7 @@ while True:
     user_choice = get_user_choice()
     if user_choice == '1':
         transaction_amount = get_user_input()
-        add_value(transaction_amount, last_transaction=get_last_blockchain_value())
+        add_transaction(transaction_amount, last_transaction=get_last_blockchain_value())
     elif user_choice == '2':
         print_blockchain_elements()
     elif user_choice == 'h':
